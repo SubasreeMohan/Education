@@ -1,0 +1,134 @@
+<div class="container">
+  <mat-card>
+  <div class="row">
+    <div class="col-sm-2">
+      <div class="row align-items-center justify-content-center" style="height:73px;width: 143px;">
+        <div class="col h6 text-center">EAUCTION LOGO</div>
+      </div>
+    </div>
+    <div class="col-sm text-align-center">
+      <p class="text-center h4">Fetch Details</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-2">
+      <p class="h6">Product</p>
+    </div>
+    <div class="col-sm">
+      <div class="row">
+        <div class="col-sm">
+          <mat-form-field>
+            <mat-select placeholder="Select Product" name="productName" [(ngModel)]="productName" > 
+              <mat-option *ngFor="let prd of products" [value]="prd.productName" >{{ prd.productName }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-sm-1">
+          <button mat-raised-button color="primary" (click)="getProductById()">GET</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-2">
+      <p class="h6">Product Name</p>
+    </div>
+    <div class="col-sm">
+      <mat-form-field appearance="fill">
+        <input matInput [(ngModel)]="product.productName">
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-2">
+       <p class="h6">Short Description</p>
+    </div>
+    <div class="col-sm">
+      <mat-form-field appearance="fill">
+        <input matInput [(ngModel)]="product.shortDescription">
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-2">
+     <p class="h6"> Detailed Description</p>
+    </div>
+    <div class="col-sm">
+      <mat-form-field appearance="fill">
+        <input matInput [(ngModel)]="product.detailedDescription">
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-2">
+      <p class="h6">Category</p>
+    </div>
+    <div class="col-sm">
+      <mat-form-field appearance="fill">
+        <input matInput [(ngModel)]="product.category">
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-2">
+      <p class="h6">Starting Price</p>
+    </div>
+    <div class="col-sm">
+      <mat-form-field appearance="fill">
+        <input matInput [(ngModel)]="product.startingPrice">
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-2">
+      <p class="h6">Bid End Date</p>
+    </div>
+    <div class="col-sm">
+      <mat-form-field appearance="fill">
+        <input matInput [(ngModel)]="product.bidEndDate">
+      </mat-form-field>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-sm text-align-center">
+      <p class="text-center h4">Bids</p>
+    </div>
+  </div>
+
+  <div class="row">
+  <div class="col-sm">
+    <div class="col-sm text-align-center" *ngIf="product.buyers.length==0">
+      <p class="text-center h4 text-danger">No Record Found.</p>
+    </div>
+  <table mat-table [dataSource]="product.buyers" class="mat-elevation-z8" *ngIf="product.buyers.length>0">
+    <ng-container matColumnDef="bidAmount">
+      <th mat-header-cell *matHeaderCellDef> <p class="h6">Bid Amount</p></th>
+      <td mat-cell *matCellDef="let element"> {{element.bidAmount}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> <p class="h6">Name</p> </th>
+      <td mat-cell *matCellDef="let element"> {{element.firstName+', '+element.lastName}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> <p class="h6">Email</p> </th>
+      <td mat-cell *matCellDef="let element"> <a href="#">{{element.email}}</a> </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef> <p class="h6">Mobile</p> </th>
+      <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+    </ng-container>
+   
+     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr> 
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+  </div>
+  </div>
+</mat-card>
+</div>
